@@ -9,16 +9,16 @@ Input* Input::Instance()
 }
 //======================================================================================================
 Input::Input() {}
+bool Input::IsKeyPressed() const
+{
+	return m_isKeyPressed;
+}
 //======================================================================================================
 bool Input::IsXClicked() const
 {
 	return m_isXClicked;
 }
 //======================================================================================================
-bool Input::IsKeyPressed() const
-{
-	return m_isKeyPressed;
-}
 //======================================================================================================
 bool Input::IsWindowResized() const
 {
@@ -60,7 +60,7 @@ char Input::GetKeyUp() const
 	return m_keyUp;
 }
 //======================================================================================================
-char Input::GetKeyDown() const
+char Input::GetKeyDown(char key)
 {
 	return m_keyDown;
 }
@@ -123,74 +123,73 @@ void Input::Update()
 		switch (events.type)
 		{
 
-		case SDL_WINDOWEVENT:
-		{
-			if (events.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+			case SDL_WINDOWEVENT:
 			{
-				m_isWindowResized = true;
+				if (events.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+				{
+					m_isWindowResized = true;
+				}
+				break;
 			}
 
-			break;
-		}
-
-		case SDL_QUIT:
-		{
-			m_isXClicked = true;
-			break;
-		}
-
-		case SDL_KEYUP:
-		{
-			m_isKeyPressed = false;
-			m_keyUp = events.key.keysym.sym;
-			break;
-		}
-
-		case SDL_KEYDOWN:
-		{
-			m_isKeyPressed = true;
-			m_keyUp = events.key.keysym.sym;
-			break;
-		}
-
-		case SDL_MOUSEMOTION:
-		{
-			m_mousePosition.x = events.motion.x;
-			m_mousePosition.y = events.motion.y;
-			m_mouseMotion.x = events.motion.xrel;
-			m_mouseMotion.y = events.motion.yrel;
-			break;
-		}
-
-		case SDL_MOUSEWHEEL:
-		{
-			m_mouseWheel.x = events.wheel.x;
-			m_mouseWheel.y = events.wheel.y;
-			break;
-		}
-
-		case SDL_MOUSEBUTTONUP:
-		{
-			switch (events.button.button)
+			case SDL_QUIT:
 			{
-			case SDL_BUTTON_LEFT: { m_isLeftButtonClicked = false; break; }
-			case SDL_BUTTON_RIGHT: { m_isRightButtonClicked = false; break; }
-			case SDL_BUTTON_MIDDLE: { m_isMiddleButtonClicked = false; break; }
+				m_isXClicked = true;
+				break;
 			}
 
-			break;
-		}
-
-		case SDL_MOUSEBUTTONDOWN:
-		{
-			switch (events.button.button)
+			case SDL_KEYUP:
 			{
-			case SDL_BUTTON_LEFT: { m_isLeftButtonClicked = true; break; }
-			case SDL_BUTTON_RIGHT: { m_isRightButtonClicked = true; break; }
-			case SDL_BUTTON_MIDDLE: { m_isMiddleButtonClicked = true; break; }
+				m_isKeyPressed = false;
+				m_keyUp = events.key.keysym.sym;
+				break;
 			}
-			break;
-		}
+
+			case SDL_KEYDOWN:
+			{
+				m_isKeyPressed = true;
+				m_keyUp = events.key.keysym.sym;
+				break;
+			}
+
+			case SDL_MOUSEMOTION:
+			{
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
+				m_mouseMotion.x = events.motion.xrel;
+				m_mouseMotion.y = events.motion.yrel;
+				break;
+			}
+
+			case SDL_MOUSEWHEEL:
+			{
+				m_mouseWheel.x = events.wheel.x;
+				m_mouseWheel.y = events.wheel.y;
+				break;
+			}
+
+			case SDL_MOUSEBUTTONUP:
+			{
+				switch (events.button.button)
+				{
+				case SDL_BUTTON_LEFT: { m_isLeftButtonClicked = false; break; }
+				case SDL_BUTTON_RIGHT: { m_isRightButtonClicked = false; break; }
+				case SDL_BUTTON_MIDDLE: { m_isMiddleButtonClicked = false; break; }
+				}
+
+				break;
+			}
+
+			case SDL_MOUSEBUTTONDOWN:
+			{
+				switch (events.button.button)
+				{
+				case SDL_BUTTON_LEFT: { m_isLeftButtonClicked = true; break; }
+				case SDL_BUTTON_RIGHT: { m_isRightButtonClicked = true; break; }
+				case SDL_BUTTON_MIDDLE: { m_isMiddleButtonClicked = true; break; }
+				}
+				break;
+			}
 		}
 	}
 }

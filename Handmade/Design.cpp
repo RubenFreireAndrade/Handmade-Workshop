@@ -207,6 +207,11 @@ State* Design::Update(int deltaTime)
 	{
 		return nullptr;
 	}
+	// TODO - Fix this to add keyboard shortcuts for Game Engine.
+	/*if (Input::Instance()->GetKeyDown(SDLK_p))
+	{
+		return new MainMenuState();
+	}*/
 	if (Input::Instance()->IsKeyPressed())
 	{
 		return new MainMenuState();

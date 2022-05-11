@@ -1,4 +1,5 @@
 #pragma once
+#include <list>
 #include <SDL.h>
 #include <glm.hpp>
 
@@ -37,9 +38,9 @@ public:
 	static Input* Instance();
 
 	char GetKeyUp() const;
-	char GetKeyDown() const;
+	char GetKeyDown(char key);
 	KeyState GetKeyStates() const;
-
+	
 	bool IsXClicked() const;
 	bool IsKeyPressed() const;
 	bool IsWindowResized() const;
@@ -81,5 +82,7 @@ private:
 	bool m_isLeftButtonClicked{ false };
 	bool m_isRightButtonClicked{ false };
 	bool m_isMiddleButtonClicked{ false };
+
+	std::list<char> m_keys;
 
 };

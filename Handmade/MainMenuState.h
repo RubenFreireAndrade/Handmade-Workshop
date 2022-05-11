@@ -1,6 +1,14 @@
 #pragma once
+#include <memory>
+#include <vector>
 #include "State.h"
+#include "Text.h"
+#include "Audio.h"
+#include "Object.h"
+#include "Shader.h"
 #include "Screen.h"
+#include "Material.h"
+#include "FreeCamera.h"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -18,7 +26,15 @@ public:
 	virtual bool Render() override;
 	virtual void OnExit() override;
 
-private:
+	void RenderPlay();
 
+private:
+	std::unique_ptr<Shader> m_mainShader;
+	std::unique_ptr<Shader> m_textShader;
+	std::unique_ptr<Shader> m_lightShader;
+	std::unique_ptr<Shader> m_testShader;
+	std::unique_ptr<FreeCamera> m_sceneCamera;
+
+	std::vector<std::unique_ptr<Object>> m_objects;
 };
 
