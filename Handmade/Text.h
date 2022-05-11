@@ -15,14 +15,12 @@ public:
 	static bool Initialize();
 	static void Shutdown();
 
-	static bool Load(const std::string& tag,
-		const std::string& filename, GLuint fontSize);
+	static bool Load(const std::string& tag, const std::string& filename, GLuint fontSize);
 	static void Unload(const std::string& tag = "");
 
 	static void SetRootFolder(const std::string& rootFolder);
 
-	Text(const std::string& tag, 
-		const std::string& filename = "", GLuint fontSize = 10U);
+	Text(const std::string& tag, const std::string& filename = "", GLuint fontSize = 10U);
 	Text(const Text& copy);
 	virtual ~Text();
 

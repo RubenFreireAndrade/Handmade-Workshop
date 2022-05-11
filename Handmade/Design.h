@@ -17,6 +17,7 @@
 #include "Shader.h"
 #include "State.h"
 #include "Text.h"
+#include "MainMenuState.h"
 
 const auto MINOR = 0.15f;
 const auto MAJOR = 0.85f;

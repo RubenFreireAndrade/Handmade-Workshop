@@ -146,7 +146,7 @@ bool Design::OnEnter()
 	m_sceneCamera->SetVelocity(0.0f);
 	m_sceneCamera->SetSensitivity(0.0f);
 	m_sceneCamera->GetTransform().SetPosition(0.0f, 0.0f, 50.0f);
-	m_sceneCamera->SetBackgroundColor(29U, 29U, 29U);
+	m_sceneCamera->SetBackgroundColor(207U, 207U, 207U);
 	m_consoleLog.push_front("Scene camera created.");
 
 	//=========================================================================
@@ -206,6 +206,10 @@ State* Design::Update(int deltaTime)
 	if (Input::Instance()->IsXClicked() || m_isStateComplete)
 	{
 		return nullptr;
+	}
+	if (Input::Instance()->IsKeyPressed())
+	{
+		return new MainMenuState();
 	}
 
 	//==============================================================================
